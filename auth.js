@@ -24,9 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const passwordInput = document.getElementById('auth-password');
     const nameInput = document.getElementById('auth-name');
 
-    // Determine mode based on page URL
-    const isLoginMode = window.location.pathname.includes('login.html');
-    const isSignupMode = window.location.pathname.includes('signup.html');
+    // Determine mode based on page URL (handles both .html and clean URLs)
+    const isLoginMode = window.location.pathname.includes('login');
+    const isSignupMode = window.location.pathname.includes('signup');
 
     // Handle Form Submission
     if (authForm) {
