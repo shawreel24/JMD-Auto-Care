@@ -489,6 +489,7 @@
         <li><a href="index.html#reviews">Reviews</a></li>
         <li><a href="index.html#contact">Contact</a></li>
         <li class="nav-auth-item"><a href="login.html" id="nav-login-btn">Login</a></li>
+        <li class="nav-auth-item"><a href="signup.html" id="nav-signup-btn">Sign Up</a></li>
       </ul>
 
       <div class="nav-cta">
@@ -1063,6 +1064,7 @@
         const { data: { session } } = await window.supabaseClient.auth.getSession();
         if (session) {
           const loginBtn = document.getElementById('nav-login-btn');
+          const signupBtn = document.getElementById('nav-signup-btn');
           if (loginBtn) {
             loginBtn.textContent = 'Logout';
             loginBtn.href = '#';
@@ -1071,6 +1073,9 @@
               await window.supabaseClient.auth.signOut();
               window.location.reload();
             });
+          }
+          if (signupBtn) {
+            signupBtn.style.display = 'none';
           }
         }
       }

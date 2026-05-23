@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login | JMD Auto Care</title>
+  <title>Sign Up | JMD Auto Care</title>
   <link rel="stylesheet" href="style.css?v=2" />
   <link rel="icon" type="image/png" href="assets/jmd_logo.png" />
   <style>
@@ -171,14 +171,14 @@
     
     <div class="login-box" id="login-box">
       <div class="login-header">
-        <h1 class="login-title" id="auth-title">Welcome Back</h1>
-        <p class="login-subtitle" id="auth-subtitle">Sign in to your account</p>
+        <h1 class="login-title" id="auth-title">Create Account</h1>
+        <p class="login-subtitle" id="auth-subtitle">Join JMD Auto Care today</p>
       </div>
 
       <form class="auth-form" id="auth-form">
-        <div class="form-group" id="name-group" style="display: none;">
+        <div class="form-group" id="name-group">
           <label class="form-label" for="auth-name">Full Name</label>
-          <input type="text" id="auth-name" class="form-input" placeholder="e.g. John Doe" />
+          <input type="text" id="auth-name" class="form-input" placeholder="e.g. John Doe" required />
         </div>
         <div class="form-group">
           <label class="form-label" for="auth-email">Email Address</label>
@@ -188,14 +188,14 @@
           <label class="form-label" for="auth-password">Password</label>
           <input type="password" id="auth-password" class="form-input" placeholder="••••••••" required />
         </div>
-        <button type="submit" class="btn btn-primary auth-btn" id="auth-submit-btn">Sign In</button>
+        <button type="submit" class="btn btn-primary auth-btn" id="auth-submit-btn">Sign Up</button>
       </form>
       
       <div class="error-msg" id="auth-error"></div>
 
       <div class="auth-switch">
-        <span id="auth-switch-text">Don't have an account?</span> 
-        <a href="signup.html" id="auth-switch-link">Sign Up</a>
+        <span id="auth-switch-text">Already have an account?</span> 
+        <a href="login.html" id="auth-switch-link">Sign In</a>
       </div>
     </div>
   </div>

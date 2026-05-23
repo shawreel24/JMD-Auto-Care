@@ -24,34 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const passwordInput = document.getElementById('auth-password');
     const nameInput = document.getElementById('auth-name');
 
-    let isLoginMode = true;
-
-    // Toggle between Login and Sign Up mode
-    if (authSwitchLink) {
-        authSwitchLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            isLoginMode = !isLoginMode;
-            authError.textContent = '';
-            
-            if (isLoginMode) {
-                authTitle.textContent = 'Welcome Back';
-                authSubtitle.textContent = 'Sign in to your account';
-                nameGroup.style.display = 'none';
-                authSubmitBtn.textContent = 'Sign In';
-                authSwitchText.textContent = "Don't have an account?";
-                authSwitchLink.textContent = 'Sign Up';
-                nameInput.removeAttribute('required');
-            } else {
-                authTitle.textContent = 'Create Account';
-                authSubtitle.textContent = 'Join JMD Auto Care today';
-                nameGroup.style.display = 'flex';
-                authSubmitBtn.textContent = 'Sign Up';
-                authSwitchText.textContent = "Already have an account?";
-                authSwitchLink.textContent = 'Sign In';
-                nameInput.setAttribute('required', 'true');
-            }
-        });
-    }
+    // Determine mode based on page URL
+    const isLoginMode = window.location.pathname.includes('login.html');
+    const isSignupMode = window.location.pathname.includes('signup.html');
 
     // Handle Form Submission
     if (authForm) {
@@ -96,8 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         authError.textContent = 'Email already exists. Please sign in.';
                     } else {
                         alert('Registration successful! Please check your email to verify your account.');
-                        // Switch back to login
-                        authSwitchLink.click();
+                        window.location.href = 'login.html';
                     }
                 }
             } catch (err) {
