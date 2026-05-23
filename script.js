@@ -166,42 +166,44 @@ if (heroStats) {
 function handleFormSubmit(e) {
   e.preventDefault();
 
-  const form    = document.getElementById('booking-form');
+  // Support both old and new form IDs
+  const form    = document.getElementById('enquiry-form') || document.getElementById('booking-form');
   const success = document.getElementById('form-success');
   const btn     = document.getElementById('form-submit-btn');
 
-  const name    = document.getElementById('form-name').value.trim();
-  const phone   = document.getElementById('form-phone').value.trim();
-  const service = document.getElementById('form-service').value;
+  const name    = (document.getElementById('form-name')?.value || '').trim();
+  const phone   = (document.getElementById('form-phone')?.value || '').trim();
+  const message = (document.getElementById('form-message')?.value || '').trim();
 
-  if (!name || !phone || !service) {
+  if (!name || !phone) {
     shakeElement(btn);
     return;
   }
 
-  // Simulate submission (replace with real endpoint or WhatsApp redirect)
+  // Show sending state
   btn.textContent = '⏳ Sending...';
   btn.disabled    = true;
 
   setTimeout(() => {
     // Build WhatsApp message
-    const message = encodeURIComponent(
-      `Hi JMD Auto Care! 👋\n\nI'd like to book a service:\n\n` +
+    const waText = encodeURIComponent(
+      `Hi JMD Auto Care! 👋\n\n` +
       `👤 Name: ${name}\n` +
       `📞 Phone: ${phone}\n` +
-      `🔧 Service: ${service}\n\n` +
-      `Please confirm my slot. Thank you!`
+      (message ? `💬 Message: ${message}\n` : '') +
+      `\nPlease get back to me. Thank you!`
     );
-    const waLink = `https://wa.me/917005299902?text=${message}`;
+    const waLink = `https://wa.me/917005299902?text=${waText}`;
 
-    form.style.display    = 'none';
-    success.style.display = 'block';
+    // Show success state
+    if (form)    form.style.display    = 'none';
+    if (success) success.style.display = 'block';
 
-    // Open WhatsApp after short delay
+    // Open WhatsApp after short delay so user sees the success message
     setTimeout(() => {
       window.open(waLink, '_blank');
     }, 800);
-  }, 1200);
+  }, 1000);
 }
 
 // Shake animation for invalid form
