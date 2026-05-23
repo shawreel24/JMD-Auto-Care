@@ -22,18 +22,7 @@ const navMenu      = document.getElementById('nav-menu');
 hamburgerBtn.addEventListener('click', () => {
   const isOpen = navMenu.classList.toggle('open');
   hamburgerBtn.setAttribute('aria-expanded', isOpen);
-
-  // Animate hamburger → X
-  const spans = hamburgerBtn.querySelectorAll('span');
-  if (isOpen) {
-    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-    spans[1].style.opacity   = '0';
-    spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-  } else {
-    spans[0].style.transform = '';
-    spans[1].style.opacity   = '';
-    spans[2].style.transform = '';
-  }
+  hamburgerBtn.classList.toggle('active', isOpen);
 });
 
 // Close menu when a link is clicked
@@ -41,10 +30,7 @@ navMenu.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
     navMenu.classList.remove('open');
     hamburgerBtn.setAttribute('aria-expanded', 'false');
-    const spans = hamburgerBtn.querySelectorAll('span');
-    spans[0].style.transform = '';
-    spans[1].style.opacity   = '';
-    spans[2].style.transform = '';
+    hamburgerBtn.classList.remove('active');
   });
 });
 
