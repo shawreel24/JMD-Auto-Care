@@ -1722,8 +1722,7 @@ img { max-width: 100%; display: block; }
   .about-image-stack  { height: 280px; }
   .about-img-main     { width: 78%; height: 88%; }
   .about-img-secondary { width: 50%; height: 50%; }
-  .about-badge-float  { padding: 12px 16px; }
-  .about-badge-float .big-num { font-size: 1.8rem; }
+  .about-badge-float  { display: none; }
 
   /* === Services === */
   .services-header { flex-direction: column; align-items: flex-start; gap: 12px; }
