@@ -166,7 +166,6 @@ if (heroStats) {
 function handleFormSubmit(e) {
   e.preventDefault();
 
-  // Support both old and new form IDs
   const form    = document.getElementById('enquiry-form') || document.getElementById('booking-form');
   const success = document.getElementById('form-success');
   const btn     = document.getElementById('form-submit-btn');
@@ -175,35 +174,28 @@ function handleFormSubmit(e) {
   const phone   = (document.getElementById('form-phone')?.value || '').trim();
   const message = (document.getElementById('form-message')?.value || '').trim();
 
+  // Require name and phone at minimum
   if (!name || !phone) {
     shakeElement(btn);
     return;
   }
 
-  // Show sending state
-  btn.textContent = '⏳ Sending...';
-  btn.disabled    = true;
+  // Build the WhatsApp message
+  const waText = encodeURIComponent(
+    `Hello JMD Auto Care! 👋\n\n` +
+    `From: ${name}\n` +
+    `Ph no: ${phone}\n` +
+    (message ? `Message: ${message}` : '')
+  );
 
-  setTimeout(() => {
-    // Build WhatsApp message
-    const waText = encodeURIComponent(
-      `Hi JMD Auto Care! 👋\n\n` +
-      `👤 Name: ${name}\n` +
-      `📞 Phone: ${phone}\n` +
-      (message ? `💬 Message: ${message}\n` : '') +
-      `\nPlease get back to me. Thank you!`
-    );
-    const waLink = `https://wa.me/917005299902?text=${waText}`;
+  const waLink = `https://wa.me/917005299902?text=${waText}`;
 
-    // Show success state
-    if (form)    form.style.display    = 'none';
-    if (success) success.style.display = 'block';
+  // Show success state instantly
+  if (form)    form.style.display    = 'none';
+  if (success) success.style.display = 'block';
 
-    // Open WhatsApp after short delay so user sees the success message
-    setTimeout(() => {
-      window.open(waLink, '_blank');
-    }, 800);
-  }, 1000);
+  // Redirect to WhatsApp — works on both mobile and desktop
+  window.location.href = waLink;
 }
 
 // Shake animation for invalid form
