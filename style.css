@@ -433,6 +433,9 @@ img { max-width: 100%; display: block; }
   gap: 5px;
   cursor: pointer;
   padding: 6px;
+  background: transparent;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .hamburger span {
   width: 24px; height: 2px;
@@ -1651,14 +1654,12 @@ img { max-width: 100%; display: block; }
     font-weight: 600;
     color: var(--text-primary);
   }
-  /* Close button inside open menu */
-  .nav-links.open::before {
-    content: '✕';
-    position: absolute;
-    top: 20px; right: 20px;
-    font-size: 1.4rem;
-    color: var(--text-muted);
-    cursor: pointer;
+  .hamburger {
+    display: flex;
+    position: relative;
+    z-index: 1001;
+    background: transparent;
+    border: none;
   }
 
   /* === Sections: reduce vertical padding === */
