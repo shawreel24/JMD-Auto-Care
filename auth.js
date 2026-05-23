@@ -66,12 +66,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (error) throw error;
                     
-                    // Success sign up
+                    // Success sign up — redirect directly to home (no email confirmation required)
                     if (data.user && data.user.identities && data.user.identities.length === 0) {
-                        authError.textContent = 'Email already exists. Please sign in.';
+                        authError.textContent = 'An account with this email already exists. Please sign in.';
                     } else {
-                        alert('Registration successful! Please check your email to verify your account.');
-                        window.location.href = 'login.html';
+                        window.location.href = 'index.html';
                     }
                 }
             } catch (err) {
