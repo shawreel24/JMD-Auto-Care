@@ -1799,8 +1799,8 @@ img { max-width: 100%; display: block; }
   .container      { padding: 0 16px; }
 
   /* About image stack: show only main image */
-  .about-image-stack  { height: 240px; }
-  .about-img-main     { width: 100%; height: 100%; position: relative; top: auto; left: auto; }
+  .about-image-stack  { height: auto; }
+  .about-img-main     { width: 100%; height: 240px; position: relative; top: auto; left: auto; }
   .about-img-secondary { display: none; }
   .about-badge-float  {
     position: static;
