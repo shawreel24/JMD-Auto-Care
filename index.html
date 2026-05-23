@@ -11,6 +11,8 @@
   <title>JMD Auto Care | Auto Detailing Studio — Aizawl</title>
   <link rel="stylesheet" href="style.css?v=2" />
   <link rel="icon" type="image/png" href="assets/jmd_logo.png" />
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -30,6 +32,7 @@
         <li><a href="products.html">Products</a></li>
         <li><a href="#reviews">Reviews</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li class="nav-auth-item"><a href="login.html" id="nav-login-btn">Login</a></li>
       </ul>
 
       <div class="nav-cta">
@@ -846,5 +849,26 @@
   </a>
 
   <script src="script.js?v=2"></script>
+  <script src="supabase-client.js"></script>
+  <script>
+    // Update Auth UI in navbar if user is logged in
+    document.addEventListener('DOMContentLoaded', async () => {
+      if (window.supabaseClient) {
+        const { data: { session } } = await window.supabaseClient.auth.getSession();
+        if (session) {
+          const loginBtn = document.getElementById('nav-login-btn');
+          if (loginBtn) {
+            loginBtn.textContent = 'Logout';
+            loginBtn.href = '#';
+            loginBtn.addEventListener('click', async (e) => {
+              e.preventDefault();
+              await window.supabaseClient.auth.signOut();
+              window.location.reload();
+            });
+          }
+        }
+      }
+    });
+  </script>
 </body>
 </html>

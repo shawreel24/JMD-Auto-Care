@@ -8,6 +8,8 @@
   <title>Explore Products | JMD Auto Care — Auto Care Products Store, Aizawl</title>
   <link rel="stylesheet" href="style.css?v=2" />
   <link rel="icon" type="image/png" href="assets/jmd_logo.png" />
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     /* ── Products Page Specific Styles ── */
     .products-page-hero {
@@ -486,6 +488,7 @@
         <li><a href="index.html#packages">Packages</a></li>
         <li><a href="index.html#reviews">Reviews</a></li>
         <li><a href="index.html#contact">Contact</a></li>
+        <li class="nav-auth-item"><a href="login.html" id="nav-login-btn">Login</a></li>
       </ul>
 
       <div class="nav-cta">
@@ -1049,6 +1052,28 @@
     });
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeModal();
+    });
+  </script>
+  <script src="supabase-client.js"></script>
+  <script src="products-data.js"></script>
+  <script>
+    // Update Auth UI in navbar if user is logged in
+    document.addEventListener('DOMContentLoaded', async () => {
+      if (window.supabaseClient) {
+        const { data: { session } } = await window.supabaseClient.auth.getSession();
+        if (session) {
+          const loginBtn = document.getElementById('nav-login-btn');
+          if (loginBtn) {
+            loginBtn.textContent = 'Logout';
+            loginBtn.href = '#';
+            loginBtn.addEventListener('click', async (e) => {
+              e.preventDefault();
+              await window.supabaseClient.auth.signOut();
+              window.location.reload();
+            });
+          }
+        }
+      }
     });
   </script>
 </body>
